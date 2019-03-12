@@ -11,12 +11,12 @@ HomeStack.navigationOptions = {
     tabBarLabel: 'Home'
 };
 
-const ButtonStack = createStackNavigator({ Home: ButtonBasics });
+const ButtonStack = createStackNavigator({ Buttons: ButtonBasics });
 ButtonStack.navigationOptions = {
     tabBarLabel: 'Buttons'
 };
 
-const ScrollStack = createStackNavigator({ Links: IScrolledDownAndWhatHappenedNextShockedMe });
+const ScrollStack = createStackNavigator({ Scroll: IScrolledDownAndWhatHappenedNextShockedMe });
 ScrollStack.navigationOptions = {
     tabBarLabel: 'Scroll'
 };
