@@ -1,68 +1,65 @@
-import React, {Component} from 'react';
-import {Alert, AppRegistry, Platform, StyleSheet, Text, TouchableHighlight, TouchableNativeFeedback, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
+import React from 'react';
+import {Platform, StatusBar, StyleSheet, View} from 'react-native';
 
-export default class Touchables extends Component {
-    _onPressButton() {
-        Alert.alert('You tapped the button!')
-    }
+import AppNavigator from './navigation/AppNavigator';
 
-    _onLongPressButton() {
-        Alert.alert('You long-pressed the button!')
-    }
+export default class App extends React.Component {
+    state = {
+        isLoadingComplete: false,
+    };
 
     render() {
+        // if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
+        //     return (
+        //         <AppLoading
+        //             startAsync={this._loadResourcesAsync}
+        //             onError={this._handleLoadingError}
+        //             onFinish={this._handleFinishLoading}
+        //         />
+        //     );
+        // } else {
         return (
             <View style={styles.container}>
-                <TouchableHighlight onPress={this._onPressButton} underlayColor="white">
-                    <View style={styles.button}>
-                        <Text style={styles.buttonText}>TouchableHighlight</Text>
-                    </View>
-                </TouchableHighlight>
-                <TouchableOpacity onPress={this._onPressButton}>
-                    <View style={styles.button}>
-                        <Text style={styles.buttonText}>TouchableOpacity</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableNativeFeedback
-                    onPress={this._onPressButton}
-                    background={Platform.OS === 'android' ? TouchableNativeFeedback.SelectableBackground() : ''}>
-                    <View style={styles.button}>
-                        <Text style={styles.buttonText}>TouchableNativeFeedback</Text>
-                    </View>
-                </TouchableNativeFeedback>
-                <TouchableWithoutFeedback
-                    onPress={this._onPressButton}
-                >
-                    <View style={styles.button}>
-                        <Text style={styles.buttonText}>TouchableWithoutFeedback</Text>
-                    </View>
-                </TouchableWithoutFeedback>
-                <TouchableHighlight onPress={this._onPressButton} onLongPress={this._onLongPressButton} underlayColor="white">
-                    <View style={styles.button}>
-                        <Text style={styles.buttonText}>Touchable with Long Press</Text>
-                    </View>
-                </TouchableHighlight>
+                {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
+                <AppNavigator/>
             </View>
         );
+        // }
     }
+
+    _loadResourcesAsync = async () => {
+        return Promise.all([
+            Asset.loadAsync([
+                require('./assets/images/robot-dev.png'),
+                require('./assets/images/robot-prod.png'),
+            ]),
+            Font.loadAsync({
+                // This is the font that we are using for our tab bar
+                ...Icon.Ionicons.font,
+                // We include SpaceMono because we use it in HomeScreen.js. Feel free
+                // to remove this if you are not using it in your app
+                'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
+            }),
+        ]);
+    };
+
+    _handleLoadingError = error => {
+        // In this case, you might want to report the error to your error
+        // reporting service, for example Sentry
+        console.warn(error);
+    };
+
+    _handleFinishLoading = () => {
+        this.setState({ isLoadingComplete: true });
+    };
 }
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 60,
-        alignItems: 'center'
+        flex: 1,
+        backgroundColor: '#fff',
     },
-    button: {
-        marginBottom: 30,
-        width: 260,
-        alignItems: 'center',
-        backgroundColor: '#2196F3'
-    },
-    buttonText: {
-        padding: 20,
-        color: 'white'
-    }
 });
 
 // skip this line if using Create React Native App
-AppRegistry.registerComponent('AwesomeProject', () => Touchables);
+// AppRegistry.registerComponent('AwesomeProject', () => App);
