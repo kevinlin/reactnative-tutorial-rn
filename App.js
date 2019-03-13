@@ -1,7 +1,7 @@
 import React from 'react';
 import {Platform, StatusBar, StyleSheet, View} from 'react-native';
 
-import AppNavigator from './navigation/AppNavigator';
+import AppContainer from './navigation/AppContainer';
 
 export default class App extends React.Component {
     state = {
@@ -20,8 +20,8 @@ export default class App extends React.Component {
         // } else {
         return (
             <View style={styles.container}>
-                {Platform.OS === 'ios' && <StatusBar barStyle="default"/>}
-                <AppNavigator/>
+                {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+                <AppContainer />
             </View>
         );
         // }
