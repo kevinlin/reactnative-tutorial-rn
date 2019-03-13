@@ -1,11 +1,13 @@
 import React from 'react';
-import {Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View,} from 'react-native';
+import {Button, Image, Platform, ScrollView, StyleSheet, Text, TouchableOpacity, View,} from 'react-native';
 
-import {MonoText} from '../components/StyledText';
+import {LogoTitle} from '../components/LogoTitle'
+import {MonoText} from '../components/StyledText'
 
 export default class HomeScreen extends React.Component {
     static navigationOptions = {
-        header: null,
+        // title: 'Home',
+        headerTitle: <LogoTitle />,
     };
 
     render() {
@@ -25,6 +27,19 @@ export default class HomeScreen extends React.Component {
 
                     <View style={styles.getStartedContainer}>
                         {this._maybeRenderDevelopmentModeWarning()}
+
+                        <Button title="Go to Details"
+                                onPress={() => {
+                                    /* 1. Navigate to the Details route with params */
+                                    this.props.navigation.navigate('Details', {
+                                        itemId: 86,
+                                        otherParam: 'anything you want here',
+                                    });
+                                }}
+                        />
+                        <Button title="Go to Buttons" onPress={() => this.props.navigation.push('Buttons')} />
+                        <Button title="Go to Touchables" onPress={() => this.props.navigation.push('Touchables')} />
+                        <Button title="Go to Scrollables" onPress={() => this.props.navigation.push('Scrollables')} />
 
                         <Text style={styles.getStartedText}>Get started by opening</Text>
 

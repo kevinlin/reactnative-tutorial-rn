@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Alert, Button, StyleSheet, View} from 'react-native';
 
-export default class ButtonBasics extends Component {
+export default class ButtonBasics extends React.Component {
     _onPressButton() {
         Alert.alert('You tapped the button!')
     }
@@ -9,15 +9,18 @@ export default class ButtonBasics extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <Button title="Go to Details... again" onPress={() => this.props.navigation.push('Buttons')} />
+                <Button title="Go to Home" onPress={() => this.props.navigation.navigate('Home')} />
+                <Button title="Go back" onPress={() => this.props.navigation.goBack()} />
                 <View style={styles.buttonContainer}>
-                    <Button onPress={this._onPressButton} title="Press Me"/>
+                    <Button onPress={this._onPressButton} title="Press Me" />
                 </View>
                 <View style={styles.buttonContainer}>
-                    <Button onPress={this._onPressButton} title="Press Me" color="#841584"/>
+                    <Button onPress={this._onPressButton} title="Press Me" color="#841584" />
                 </View>
                 <View style={styles.alternativeLayoutButtonContainer}>
-                    <Button onPress={this._onPressButton} title="This looks great!"/>
-                    <Button onPress={this._onPressButton} title="OK!" color="#841584"/>
+                    <Button onPress={this._onPressButton} title="This looks great!" />
+                    <Button onPress={this._onPressButton} title="OK!" color="#841584" />
                 </View>
             </View>
         );
