@@ -7,6 +7,13 @@ import {MonoText} from '../components/StyledText'
 export default class HomeScreen extends React.Component {
     static navigationOptions = ({ navigation }) => {
         return {
+            headerLeft: (
+                <Button
+                    onPress={() => navigation.navigate('MyModal')}
+                    title="Info"
+                    color="#fff"
+                />
+            ),
             // title: 'Home',
             headerTitle: <LogoTitle />,
             headerRight: (
